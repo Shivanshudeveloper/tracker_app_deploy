@@ -542,36 +542,6 @@ export default function LandingPage() {
                     </Grid>
                 </Grid>
 
-
-                <Grid style={{ marginTop: '10px' }} container spacing={3}>
-                    <Grid mt={2} item xs={12} sm={12}>
-                        <h2>
-                        API
-                        </h2>
-                    </Grid>
-                    <Grid mt={2} item xs={4} sm={4}>
-                        <Paper style={{ padding: '10px', cursor: 'pointer' }} elevation={3}>
-                            <center>
-                                <br />
-                                <img style={{ width: '100px', height: '68px' }} src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zapier_logo.svg" />
-                                <small>
-                                Zapier
-                                </small>
-                            </center>
-                        </Paper>
-                    </Grid>
-                    <Grid mt={2} item xs={4} sm={4}>
-                        <Paper style={{ padding: '10px', cursor: 'pointer' }} elevation={3}>
-                            <center>
-                                <br />
-                                <img style={{ width: '100px', height: '68px' }} src="https://cdn.integromat.com/s3/blog/d6c254e3c012/integromat-best-no-code-tool.png" />
-                                <small>
-                                Integromat
-                                </small>
-                            </center>
-                        </Paper>
-                    </Grid>
-                </Grid>
                 <br />
                 <br />
                 <br />
