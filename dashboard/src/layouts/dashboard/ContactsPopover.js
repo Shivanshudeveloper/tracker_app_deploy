@@ -66,7 +66,7 @@ export default function ContactsPopover() {
 
       <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current} sx={{ width: 360 }}>
         <Typography variant="h6" sx={{ p: PADDING_ITEM }}>
-          Contacts <Typography component="span">({contacts.length})</Typography>
+          People <Typography component="span">({contacts.length})</Typography>
         </Typography>
 
         <Scrollbar sx={{ height: ITEM_HEIGHT * 8 }}>
