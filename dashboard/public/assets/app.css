@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+.fontchange {
+    font-family: 'Nunito', sans-serif;
+}
+
+.heading {
+    font-size: 40px;
+}
+
+.marginTop {
+    margin-top: 20px;
+}
