@@ -79,9 +79,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {user.displayName}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {user.role}
-              </Typography>
             </Box>
           </AccountStyle>
         </Link>
