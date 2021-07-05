@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: '#000',
-    height: '150px',
+    height: '160px',
     padding: '20px'
   },
 }));
@@ -154,7 +154,7 @@ export default function GeneralAnalytics() {
                           id="combo-box-demo"
                           options={time}
                           getOptionLabel={(option) => option.title}
-                          style={{ width: 300 }}
+                          style={{ width: "auto" }}
                           renderInput={(params) => <TextField {...params} label="Time" variant="outlined" />}
                       />
                   </Grid>
@@ -163,7 +163,7 @@ export default function GeneralAnalytics() {
                           id="combo-box-demo"
                           options={top100Films}
                           getOptionLabel={(option) => option.title}
-                          style={{ width: 300 }}
+                          style={{ width: "auto" }}
                           renderInput={(params) => <TextField {...params} label="People" variant="outlined" />}
                       />
                   </Grid>
@@ -172,7 +172,7 @@ export default function GeneralAnalytics() {
                           id="combo-box-demo"
                           options={projectsall}
                           getOptionLabel={(option) => option.title}
-                          style={{ width: 300 }}
+                          style={{ width: "auto" }}
                           renderInput={(params) => <TextField {...params} label="Any Project" variant="outlined" />}
                       />
                   </Grid>
@@ -181,7 +181,7 @@ export default function GeneralAnalytics() {
                           id="combo-box-demo"
                           options={tagsall}
                           getOptionLabel={(option) => option.title}
-                          style={{ width: 300 }}
+                          style={{ width: "auto" }}
                           renderInput={(params) => <TextField {...params} label="Tags" variant="outlined" />}
                       />
                   </Grid>
