@@ -75,16 +75,15 @@ export default function DetailReport() {
         <small>Logged hours and money for a specific project</small>
         <br />
         <br />
-        
-        <Grid container spacing={3}>
-            <Grid item xs={4} sm={3}>
-                <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
-                    <Button>Billed</Button>
-                    <Button>Unbilled</Button>
-                    <Button>Total</Button>
-                </ButtonGroup>
-            </Grid>
-            <Grid item xs={4} sm={3}>
+
+        <ButtonGroup color="primary" aria-label="large outlined primary button group">
+            <Button>Billed</Button>
+            <Button>Unbilled</Button>
+            <Button>Total</Button>
+        </ButtonGroup>
+        <Grid mt={0.1} container spacing={3}>
+            
+            <Grid item xs={5} sm={4}>
                 <Autocomplete
                     id="combo-box-demo"
                     options={top100Films}
@@ -93,7 +92,7 @@ export default function DetailReport() {
                     renderInput={(params) => <TextField {...params} label="People" variant="outlined" />}
                 />
             </Grid>
-            <Grid item xs={4} sm={3}>
+            <Grid item xs={5} sm={4}>
                 <Autocomplete
                     id="combo-box-demo"
                     options={projectsall}
@@ -102,7 +101,7 @@ export default function DetailReport() {
                     renderInput={(params) => <TextField {...params} label="Any Project" variant="outlined" />}
                 />
             </Grid>
-            <Grid item xs={4} sm={3}>
+            <Grid item xs={5} sm={4}>
                 <Autocomplete
                     id="combo-box-demo"
                     options={tagsall}
