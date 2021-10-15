@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // material
 import { Container } from '@material-ui/core';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
@@ -9,6 +9,7 @@ import Page from '../../components/Page';
 import { v4 as uuid } from 'uuid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { database } from '../../Firebase/index';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,6 +18,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from '@material-ui/core/Select';
+
+var prevData = [];
+
 const itemsFromBackend = [
   { id: uuid(), content: "Signed Up for tracker app", icon: "https://img.icons8.com/color/28/000000/circled-up-2--v1.png" },
   { id: uuid(), content: "Second task", icon: "https://img.icons8.com/color/28/000000/circled-up-2--v1.png" },
@@ -80,6 +84,70 @@ const onDragEnd = (result, columns, setColumns) => {
 
 // ----------------------------------------------------------------------
 
+const AllData = ({
+  data
+}) => {
+  return (
+    <>
+      <Paper style={{ padding: '16px', marginTop: '4px' }} elevation={3}>
+
+        <p>
+          <img style={{ float: 'right' }} src={data.icon} /> 
+          {data.apptitle}
+          <br />
+          <h5>
+            {data.owner}
+          </h5>
+          <br />
+          <h5>
+            {data.time} Sec
+          </h5>
+          <br />
+          <small style={{ color: 'gray' }}>
+            {data.platform} Operating System
+          </small>
+          <Button style={{ float: 'right' }} aria-controls="simple-menu" aria-haspopup="true" >
+            View Images
+          </Button>
+        </p>
+
+      </Paper>      
+    </>
+  );
+};
+
+const AllDataPrev = ({
+  data
+}) => {
+  return (
+    <>
+      <Paper style={{ padding: '16px', marginTop: '10px' }} elevation={3}>
+
+        <p>
+          <img style={{ float: 'right' }} src={data.icon} /> 
+          {data.apptitle}
+          <br />
+          <h5>
+            {data.owner}
+          </h5>
+          <br />
+          <h5>
+            {data.time} Sec
+          </h5>
+          <br />
+          <small style={{ color: 'gray' }}>
+            {data.platform} Operating System
+          </small>
+          <Button style={{ float: 'right' }} aria-controls="simple-menu" aria-haspopup="true" >
+            View Images
+          </Button>
+        </p>
+
+      </Paper>      
+    </>
+  );
+};
+
 export default function GeneralApp(props) {
   const [columns, setColumns] = useState(columnsFromBackend);
   const [project, setproject] = useState('Select Project');
@@ -102,6 +170,39 @@ export default function GeneralApp(props) {
     setOpenDialog(false);
   };
 
+  const [alldata, setalldata] = useState([]);
+
+  useEffect(() => {
+    var starCountRef = database.ref('tracker/testuser1234');
+      starCountRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        setalldata([data.work]);
+        prevData.push(data.work);
+    });
+  }, []);
+
+  const showAllData = () => {
+    return alldata.map((data) => {
+      return (
+        <AllData
+          data={data}
+          key={data.apptitle}
+        />
+      );
+    });
+  };
+
+  const showAllDataPrev = () => {
+    return prevData.map((data) => {
+      return (
+        <AllDataPrev
+          data={data}
+          key={data.apptitle}
+        />
+      );
+    });
+  };
+  
   // let { userid } = useParams();
   // console.log(userid);
 
@@ -164,106 +265,30 @@ export default function GeneralApp(props) {
         </DialogActions>
       </Dialog>
 
-
-
       <Container maxWidth="xl">
-      <h2 className="fontchange">Hours</h2>
+        <h2 className="fontchange">Hours</h2>
+      </Container>
+
+      <Container maxWidth="md">
+      <center>
+          <img src="https://img.icons8.com/color/68/000000/circled-user-male-skin-type-3--v1.png" /> <br />
+          <h4>Shivanshu Gupta</h4>
+      </center>
       <br />
-      <div style={{ display: "flex", justifyContent: 'center', height: "100%", width: '100%' }}>
-        <DragDropContext
-          onDragEnd={result => onDragEnd(result, columns, setColumns)}
-        >
-          {Object.entries(columns).map(([columnId, column], index) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-                key={columnId}
-              >
-                <h2>{column.name}</h2>
-                <div style={{ margin: 8 }}>
-                  <Droppable droppableId={columnId} key={columnId}>
-                    {(provided, snapshot) => {
-                      return (
-                        <Paper
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                          style={{
-                            background: snapshot.isDraggingOver
-                              ? "lightgray"
-                              : "whitesmoke",
-                            padding: 5,
-                            width: "510px",
-                            height: "auto"
-                          }}
-                        >
-                          {column.items.map((item, index) => {
-                            return (
-                              <Draggable
-                                key={item.id}
-                                draggableId={item.id}
-                                index={index}
-                              >
-                                {(provided, snapshot) => {
-                                  return (
-                                    <Paper
-                                    ref={provided.innerRef}
-                                    elevation={3}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "auto",
-                                      width: "500px",
-                                      backgroundColor: snapshot.isDragging
-                                        ? "ghostwhite"
-                                        : "white",
-                                      color: "black",
-                                      ...provided.draggableProps.style
-                                    }}
-                                    >
-                                      <p>
-                                        <img style={{ float: 'right' }} src={item.icon} /> 
-                                        {item.content}
-                                        <br />
-                                        <h5>
-                                          2:00 PM, 28th June 2021
-                                        </h5>
-                                        <br />
-                                        <small style={{ color: 'gray' }}>
-                                          app.trackerapp.com
-                                        </small>
-                                        <Button style={{ float: 'right' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                          More
-                                        </Button>
-                                      </p>
-                                    </Paper>
-                                  );
-                                }}
-                              </Draggable>
-                            );
-                          })}
-                          {provided.placeholder}
-                          {
-                            column.name !== "Memories" ? (
-                              <Button onClick={handleClickOpenDialog} color="secondary" size="large" fullWidth variant="contained">Add Task</Button>
-                            ) : null
-                          }
-                        </Paper>
-                      );
-                    }}
-                  </Droppable>
-                </div>
-              </div>
-            );
-          })}
-        </DragDropContext>
-      </div>
+      <>
+        <h4>
+        🔴 Live
+        </h4>
+        {showAllData()}
+      </>
+
+      {
+        <>
+          <h4>History</h4>
+          {showAllDataPrev()
+        }</>
+      }
+
       </Container>
     </Page>
   );
